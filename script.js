@@ -164,65 +164,10 @@
     }
   })();
 
-  /* ───── 5 · Phone showcase ───── */
-  (function phoneApp() {
-    var list = $('#app-list');
-    if (!list) return;
-
-    var CATEGORY = 'Store / Retail';
-    var ROSTER = [
-      { name: 'Sarah M.', photo: 'assets/emp-sarah.jpg', km: 2.4, rating: 4.9, role: 'Retail Support' },
-      { name: 'Tane W.',  photo: 'assets/emp-tane.jpg',  km: 4.2, rating: 4.9, role: 'Stock & Floor' }
-    ];
-
-    var done = $('#app-done');
-    var TICK = '<svg class="vbadge" viewBox="0 0 24 24" aria-hidden="true">' +
-      '<path d="M12 2.4l2.3 1.6 2.8-.2.9 2.7 2.2 1.7-1 2.6 1 2.6-2.2 1.7-.9 2.7-2.8-.2L12 21.6l-2.3-1.6-2.8.2-.9-2.7-2.2-1.7 1-2.6-1-2.6 2.2-1.7.9-2.7 2.8.2z"/>' +
-      '<path d="M8.4 12.1l2.4 2.4 4.7-4.9" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
-
-    function render() {
-      done.hidden = true;
-      list.hidden = false;
-      $('#app-cat').textContent = CATEGORY;
-      $('#app-kicker').textContent = 'Available now';
-      $('#app-sub').textContent = 'Takanini · ' + ROSTER.length + ' nearby';
-
-      list.innerHTML = ROSTER.map(function (p, i) {
-        return '<li class="emp" style="animation-delay:' + (i * 70) + 'ms">' +
-          '<img src="' + p.photo + '" alt="' + p.name + ', verified SAPOTR employee partner" width="42" height="42" loading="lazy">' +
-          '<span class="emp-meta">' +
-            '<span class="emp-name">' + p.name + TICK + '<span class="sr-only">Verified</span></span>' +
-            '<span class="emp-role">' + p.role + '</span>' +
-            '<span class="emp-stat"><b>' + p.km.toFixed(1) + ' km</b><b>★ ' + p.rating.toFixed(1) + '</b><b class="free">Available</b></span>' +
-          '</span>' +
-          '<button type="button" class="emp-assign" data-assign="' + p.name + '">Assign</button></li>';
-      }).join('') +
-        '<li class="app-more">+ ' + (12 - ROSTER.length) + ' more available nearby</li>';
-    }
-
-    /* Tapping Assign walks the screen to the "arriving" state. */
-    function assign(name) {
-      list.hidden = true;
-      done.hidden = false;
-      $('#done-sub').textContent = name.split(' ')[0] + ' is on the way · ' +
-        (12 + Math.floor(Math.random() * 14)) + ' min';
-    }
-
-    list.addEventListener('click', function (e) {
-      var b = e.target.closest('[data-assign]');
-      if (b) assign(b.dataset.assign);
-    });
-    $('#app-reset').addEventListener('click', render);
-
-    render();
-  })();
-
   /* ───── 6 · How-it-works cards ───── */
   (function workCards() {
     var cards = $$('#work .wcard');
     if (!cards.length || reduced) return;
-    /* Data-heavy on phones, so posters carry the small screens. */
-    if (!window.matchMedia('(min-width: 681px)').matches) return;
 
     function play(card) {
       var v = $('.wcard-video', card);
@@ -243,17 +188,59 @@
       es.forEach(function (e) {
         if (e.isIntersecting) play(e.target); else stop(e.target);
       });
-    }, { threshold: 0.25 });
+    }, { threshold: 0.5 });
     cards.forEach(function (c) { io.observe(c); });
   })();
 
   /* ───── 7 · Chat sequence ───── */
   once($('#chat'), function (card) {
-    var bubs = $$('.bub', card), chips = $$('.chat-chips li', card);
-    bubs.forEach(function (b, i) { setTimeout(function () { b.classList.add('in'); }, 300 + i * 600); });
-    chips.forEach(function (c, i) {
-      setTimeout(function () { c.classList.add('in'); }, 300 + bubs.length * 600 + i * 110);
-    });
+    var msgs = $$('.msg', card);
+    var chips = $$('.chat-chips li', card);
+    var body = $('.chat-body', card);
+    var status = $('#chat-status');
+
+    if (reduced) {
+      msgs.forEach(function (m) { m.classList.add('in'); });
+      chips.forEach(function (c) { c.classList.add('in'); });
+      return;
+    }
+
+    /* One reusable "…" bubble that hops to wherever the next reply lands. */
+    var dots = document.createElement('span');
+    dots.className = 'typing';
+    dots.innerHTML = '<i></i><i></i><i></i>';
+    body.appendChild(dots);
+
+    var at = 0;
+    function next() {
+      if (at >= msgs.length) {
+        dots.remove();
+        if (status) status.textContent = 'online';
+        chips.forEach(function (c, i) {
+          setTimeout(function () { c.classList.add('in'); }, 220 + i * 110);
+        });
+        return;
+      }
+      var m = msgs[at++];
+      var incoming = m.classList.contains('msg--in');
+
+      /* Outgoing notes appear straight away; replies get a typing beat first. */
+      if (!incoming) {
+        m.classList.add('in');
+        setTimeout(next, 620);
+        return;
+      }
+      body.insertBefore(dots, m);
+      dots.classList.add('on');
+      if (status) status.textContent = 'typing…';
+      setTimeout(function () {
+        dots.classList.remove('on');
+        if (status) status.textContent = 'online';
+        m.classList.add('in');
+        setTimeout(next, 700);
+      }, 1050);
+    }
+    setTimeout(next, 350);
   }, { threshold: 0.35 });
 
   /* ───── 8 · Count-up stats ───── */
@@ -313,6 +300,45 @@
     el.addEventListener('click', function (e) {
       if (moved > 6) { e.preventDefault(); e.stopPropagation(); }
     }, true);
+  })();
+
+  /* ───── 9b · Swipe dots for the mobile carousels ───── */
+  (function swipeDots() {
+    [['#work', '#work-dots', '.wcard'], ['#rail', '#rail-dots', '.card']].forEach(function (pair) {
+      var box = $(pair[0]), holder = $(pair[1]);
+      if (!box || !holder) return;
+      var items = $$(pair[2], box);
+      if (items.length < 2) return;
+
+      items.forEach(function (_, i) {
+        var b = document.createElement('button');
+        b.type = 'button';
+        b.setAttribute('aria-label', 'Go to ' + (i + 1) + ' of ' + items.length);
+        b.addEventListener('click', function () {
+          box.scrollTo({ left: items[i].offsetLeft - box.offsetLeft, behavior: reduced ? 'auto' : 'smooth' });
+        });
+        holder.appendChild(b);
+      });
+      var dots = $$('button', holder);
+
+      function sync() {
+        /* whichever card sits nearest the middle of the viewport is "current" */
+        var mid = box.scrollLeft + box.clientWidth / 2, best = 0, dist = Infinity;
+        items.forEach(function (el, i) {
+          var c = el.offsetLeft - box.offsetLeft + el.offsetWidth / 2;
+          var d = Math.abs(c - mid);
+          if (d < dist) { dist = d; best = i; }
+        });
+        dots.forEach(function (d, i) { d.setAttribute('aria-selected', String(i === best)); });
+      }
+      var queued = false;
+      box.addEventListener('scroll', function () {
+        if (queued) return;
+        queued = true;
+        requestAnimationFrame(function () { queued = false; sync(); });
+      }, { passive: true });
+      sync();
+    });
   })();
 
   /* ───── 10 · FAQ accordion ───── */

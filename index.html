@@ -89,7 +89,7 @@
     <span class="hero-grain"></span>
   </div>
 
-  <div class="wrap hero-grid">
+  <div class="wrap hero-inner">
     <div class="hero-copy">
       <p class="eyebrow eyebrow--light r" data-r>Verified workforce · New Zealand</p>
       <h1 data-split>Need an Extra Employee? <span class="hl">Just Tap.</span></h1>
@@ -107,41 +107,6 @@
       </div>
     </div>
 
-    <div class="hero-phone r" data-r data-parallax="0.05">
-      <div class="phone" data-tilt>
-        <span class="phone-frame" aria-hidden="true"></span>
-        <div class="phone-screen">
-          <div class="app-bar"><span>9:41</span><span class="app-dots" aria-hidden="true"><i></i><i></i><i></i></span></div>
-
-          <div class="app-head">
-            <p class="app-kicker" id="app-kicker">Available now</p>
-            <p class="app-title" id="app-cat">Store / Retail</p>
-            <p class="app-sub" id="app-sub">Takanini · 3 nearby</p>
-          </div>
-
-          <ul class="app-list" id="app-list" aria-live="polite"></ul>
-
-          <div class="app-done" id="app-done" hidden>
-            <span class="done-ring" aria-hidden="true">
-              <svg viewBox="0 0 52 52"><circle cx="26" cy="26" r="23"/><path class="dt" d="M16 27l7 7 13-14"/></svg>
-            </span>
-            <p class="done-title">Assigned</p>
-            <p class="done-sub" id="done-sub">Sarah is on the way · 18 min</p>
-            <p class="done-otp">OTP <strong>4 8 1 6</strong></p>
-            <button type="button" class="app-cta" id="app-reset">Book another</button>
-          </div>
-
-          <div class="app-tabs" aria-hidden="true">
-            <span class="app-tab is-on"><i></i>Book</span>
-            <span class="app-tab"><i></i>Bookings</span>
-            <span class="app-tab"><i></i>Account</span>
-          </div>
-        </div>
-      </div>
-
-      <span class="hud hud--rating" data-parallax="0.11">★ 4.9 average rating</span>
-      <span class="hud hud--live"   data-parallax="0.08"><i class="live-dot"></i>12 available nearby</span>
-    </div>
   </div>
 
   <a class="hero-scroll" href="#ticker" aria-label="Scroll down"><span></span></a>
@@ -174,27 +139,58 @@
       <p class="eyebrow r" data-r>The problem</p>
       <h2 data-split>Finding Reliable Help Isn’t Easy.</h2>
       <p class="lede r" data-r>Calls. Searching. Waiting. SAPOTR replaces all of it.</p>
-      <ul class="mini-facts r" data-r>
-        <li><strong>1 min</strong><span>to book</span></li>
-        <li><strong>0</strong><span>agencies</span></li>
-        <li><strong>1 day</strong><span>minimum</span></li>
-      </ul>
     </div>
 
-    <div class="chat r" data-r id="chat" data-tilt>
-      <div class="chat-top">
-        <span class="chat-mark" aria-hidden="true">S</span>
-        <span class="chat-id"><strong>SAPOTR</strong><em>replies instantly</em></span>
+    <!-- Messages live in the DOM for crawlers; JS reveals them in sequence. -->
+    <div class="chat r" data-r id="chat">
+      <div class="chat-bar">
+        <img class="chat-pic" src="assets/logo-mark.png" alt="" width="40" height="40" loading="lazy">
+        <span class="chat-who"><strong>SAPOTR</strong><em id="chat-status">online</em></span>
+        <span class="chat-icons" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M15 10.5V7a2 2 0 00-2-2H4a2 2 0 00-2 2v10a2 2 0 002 2h9a2 2 0 002-2v-3.5l7 4v-11l-7 4z"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M6.6 10.8a15 15 0 006.6 6.6l2.2-2.2a1 1 0 011-.24 11 11 0 003.5.56 1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1 11 11 0 00.56 3.5 1 1 0 01-.25 1l-2.2 2.3z"/></svg>
+        </span>
       </div>
-      <ol class="chat-log">
-        <li class="bub bub--them">Need help for a few hours today.</li>
-        <li class="bub bub--them">Finding reliable short-term help isn’t easy.</li>
-        <li class="bub bub--us">Tell us what you need.</li>
-        <li class="bub bub--us">We’ll find an available verified employee.</li>
+
+      <ol class="chat-body">
+        <li class="chat-day" aria-hidden="true"><span>Today</span></li>
+
+        <li class="msg msg--out">
+          <span class="msg-b">Need help for a few hours today.
+            <span class="msg-meta"><time datetime="09:41">9:41</time>
+              <svg class="msg-tick" viewBox="0 0 18 12" aria-hidden="true"><path d="M1 6.6l3.2 3.2L10.6 2"/><path d="M6.6 9.8L13 2"/></svg>
+            </span>
+          </span>
+        </li>
+
+        <li class="msg msg--out">
+          <span class="msg-b">Finding reliable short-term help isn’t easy.
+            <span class="msg-meta"><time datetime="09:41">9:41</time>
+              <svg class="msg-tick" viewBox="0 0 18 12" aria-hidden="true"><path d="M1 6.6l3.2 3.2L10.6 2"/><path d="M6.6 9.8L13 2"/></svg>
+            </span>
+          </span>
+        </li>
+
+        <li class="msg msg--in">
+          <img class="msg-pic" src="assets/emp-priya.jpg" alt="" width="30" height="30" loading="lazy">
+          <span class="msg-b">Tell us what you need.
+            <span class="msg-meta"><time datetime="09:42">9:42</time></span>
+          </span>
+        </li>
+
+        <li class="msg msg--in">
+          <img class="msg-pic" src="assets/emp-priya.jpg" alt="" width="30" height="30" loading="lazy">
+          <span class="msg-b">We’ll find an available verified employee.
+            <span class="msg-meta"><time datetime="09:42">9:42</time></span>
+          </span>
+        </li>
       </ol>
-      <ul class="chat-chips" aria-label="Booking details">
-        <li>Need today</li><li>3 hours</li><li>Retail</li><li>2 employees</li>
-      </ul>
+
+      <div class="chat-foot">
+        <ul class="chat-chips" aria-label="Booking details">
+          <li>Need today</li><li>3 hours</li><li>Retail</li><li>2 employees</li>
+        </ul>
+      </div>
     </div>
   </div>
 </section>
@@ -272,6 +268,7 @@
         </span>
       </li>
     </ol>
+    <div class="dots" id="work-dots" aria-hidden="true"></div>
   </div>
 </section>
 
@@ -393,6 +390,7 @@
       </li>
     </ul>
   </div>
+  <div class="wrap"><div class="dots" id="rail-dots" aria-hidden="true"></div></div>
 </section>
 
 <!-- ══════════ 6 · Numbers ══════════ -->
