@@ -217,61 +217,34 @@
     render();
   })();
 
-  /* ───── 6 · Journey filmstrip: scroll-scrubbed panels ───── */
-  (function journey() {
-    var panels = $$('#steps .panel');
-    var btns = $$('#steps .panel-btn');
-    var fill = $('#journey-fill');
-    var track = $('#journey-track');
-    if (!panels.length) return;
+  /* ───── 6 · How-it-works cards ───── */
+  (function workCards() {
+    var cards = $$('#work .wcard');
+    if (!cards.length || reduced) return;
+    /* Data-heavy on phones, so posters carry the small screens. */
+    if (!window.matchMedia('(min-width: 681px)').matches) return;
 
-    var at = -1;
-    function show(i) {
-      if (i === at) return;
-      at = i;
-      panels.forEach(function (p, n) {
-        var on = n === i;
-        p.classList.toggle('is-on', on);
-        btns[n].setAttribute('aria-pressed', String(on));
+    function play(card) {
+      var v = $('.wcard-video', card);
+      if (!v) return;
+      if (!v.dataset.loaded) { v.load(); v.dataset.loaded = '1'; }
+      var p = v.play();
+      if (p && p.catch) p.catch(function () { /* poster stands in */ });
+      card.classList.add('playing');
+    }
+    function stop(card) {
+      var v = $('.wcard-video', card);
+      if (v) v.pause();
+    }
 
-        /* Only the open panel plays — keeps four videos from decoding at once. */
-        var v = $('.panel-video', p);
-        if (!v || reduced) return;
-        if (on) {
-          if (!v.dataset.loaded) { v.load(); v.dataset.loaded = '1'; }
-          var play = v.play();
-          if (play && play.catch) play.catch(function () { /* poster stands in */ });
-        } else {
-          v.pause();
-        }
+    /* Only decode while the row is actually on screen. */
+    if (!('IntersectionObserver' in window)) { cards.forEach(play); return; }
+    var io = new IntersectionObserver(function (es) {
+      es.forEach(function (e) {
+        if (e.isIntersecting) play(e.target); else stop(e.target);
       });
-      if (fill) fill.style.width = ((i + 1) / panels.length * 100) + '%';
-    }
-
-    btns.forEach(function (b, i) {
-      b.addEventListener('click', function () { show(i); });
-      b.addEventListener('mouseenter', function () { if (!scrubs) show(i); });
-    });
-
-    /* Map scroll position inside the tall track onto the panels.
-       Pure function so the mapping can be tested without scrolling. */
-    function stepFromRect(top, height, viewport, count) {
-      var span = height - viewport;
-      if (span <= 0) return null;
-      var p = Math.min(Math.max(-top / span, 0), 0.999);
-      return Math.floor(p * count);
-    }
-    SAPOTR.stepFromRect = stepFromRect;
-
-    var scrubs = window.matchMedia('(min-width: 1001px)').matches && !reduced;
-    if (scrubs && track) {
-      onScroll(function () {
-        var r = track.getBoundingClientRect();
-        var i = stepFromRect(r.top, r.height, window.innerHeight, panels.length);
-        if (i !== null) show(i);
-      });
-    }
-    show(0);
+    }, { threshold: 0.25 });
+    cards.forEach(function (c) { io.observe(c); });
   })();
 
   /* ───── 7 · Chat sequence ───── */

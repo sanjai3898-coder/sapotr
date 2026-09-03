@@ -28,6 +28,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Bebas+Neue&family=Josefin+Sans:wght@600&family=Marcellus&family=Oswald:wght@500&family=Pacifico&family=Playfair+Display:ital,wght@1,700&family=Quicksand:wght@600&family=Roboto+Slab:wght@600&family=Saira+Condensed:wght@700&display=swap" rel="stylesheet">
 <link rel="preload" as="image" href="assets/hero-poster.jpg">
 <link rel="stylesheet" href="styles.css">
 </head>
@@ -53,9 +54,9 @@
     </a>
 
     <nav class="nav" aria-label="Sections of this page">
-      <a href="#how-it-works">For Businesses</a>
-      <a href="#partners">For Employee Partners</a>
-      <a href="#faq">Support</a>
+      <a href="#how-it-works">How it works</a>
+      <a href="#services">Services</a>
+      <a href="#faq">FAQ</a>
     </nav>
 
     <div class="header-actions">
@@ -67,9 +68,9 @@
   </div>
 
   <div class="mobile-nav" id="mobile-nav" hidden>
-    <a href="#how-it-works">For Businesses</a>
-    <a href="#partners">For Employee Partners</a>
-    <a href="#faq">Support</a>
+    <a href="#how-it-works">How it works</a>
+    <a href="#services">Services</a>
+    <a href="#faq">FAQ</a>
     <a class="btn btn--primary" href="#book">Book an Employee</a>
   </div>
 </header>
@@ -151,16 +152,16 @@
   <div class="ticker-row">
    <div class="ticker-inner" id="ticker-inner">
     <ul class="ticker-track">
-      <li>Store &amp; Retail</li><li aria-hidden="true">·</li>
-      <li>Restaurants</li><li aria-hidden="true">·</li>
-      <li>Hotels</li><li aria-hidden="true">·</li>
-      <li>Showrooms</li><li aria-hidden="true">·</li>
-      <li>Apartments</li><li aria-hidden="true">·</li>
-      <li>Events</li><li aria-hidden="true">·</li>
-      <li>Moving &amp; Shifting</li><li aria-hidden="true">·</li>
-      <li>Maintenance</li><li aria-hidden="true">·</li>
-      <li>Property Upkeep</li><li aria-hidden="true">·</li>
-      <li>Home &amp; Personal</li><li aria-hidden="true">·</li>
+      <li class="t-retail">Store &amp; Retail</li><li class="t-dot" aria-hidden="true">•</li>
+      <li class="t-food">Restaurants</li><li class="t-dot" aria-hidden="true">•</li>
+      <li class="t-hotel">Hotels</li><li class="t-dot" aria-hidden="true">•</li>
+      <li class="t-showroom">Showrooms</li><li class="t-dot" aria-hidden="true">•</li>
+      <li class="t-apartment">Apartments</li><li class="t-dot" aria-hidden="true">•</li>
+      <li class="t-event">Events</li><li class="t-dot" aria-hidden="true">•</li>
+      <li class="t-moving">Moving &amp; Shifting</li><li class="t-dot" aria-hidden="true">•</li>
+      <li class="t-maintenance">Maintenance</li><li class="t-dot" aria-hidden="true">•</li>
+      <li class="t-property">Property Upkeep</li><li class="t-dot" aria-hidden="true">•</li>
+      <li class="t-home">Home &amp; Personal</li><li class="t-dot" aria-hidden="true">•</li>
     </ul>
    </div>
   </div>
@@ -198,95 +199,79 @@
   </div>
 </section>
 
-<!-- ══════════ 3 · How it works — filmstrip, scroll-scrubbed ══════════ -->
-<section class="section--tint journey-wrap" id="how-it-works">
-  <div class="journey-track" id="journey-track">
-    <div class="journey-sticky">
-      <div class="wrap">
-        <div class="journey-head">
-          <div>
-            <p class="eyebrow r" data-r>How it works</p>
-            <h2 data-split>From Need to Done.</h2>
-          </div>
-          <div class="journey-meter" aria-hidden="true"><span class="journey-fill" id="journey-fill"></span></div>
-        </div>
+<!-- ══════════ 3 · How it works — four fixed cards ══════════ -->
+<section class="section section--tint" id="how-it-works">
+  <div class="wrap">
+    <p class="eyebrow r" data-r>How it works</p>
+    <h2 data-split>From Need to Done.</h2>
+    <p class="section-sub r" data-r>Four steps. About a minute.</p>
 
-        <ol class="strip" id="steps">
-        <li class="panel is-on">
-          <button class="panel-btn" type="button" data-step-i="0" aria-pressed="true">
-            <span class="panel-media">
-              <video class="panel-video" muted loop playsinline preload="none"
-                     poster="assets/step-tap.jpg" aria-label="A caf&eacute; owner taking a booking on her phone while holding a tablet">
-                <source src="assets/step-tap.mp4" type="video/mp4">
-              </video>
-              <img class="panel-fallback" src="assets/step-tap.jpg" alt="A caf&eacute; owner taking a booking on her phone while holding a tablet" width="1080" height="1350" loading="lazy" decoding="async">
-              <span class="panel-scrim" aria-hidden="true"></span>
-            </span>
-            <span class="panel-n" aria-hidden="true">01</span>
-            <span class="panel-tab" aria-hidden="true">Just Tap</span>
-            <span class="panel-body">
-              <span class="panel-t">Just Tap</span>
-              <span class="panel-d">Say what you need.</span>
-            </span>
-          </button>
-        </li>
-        <li class="panel">
-          <button class="panel-btn" type="button" data-step-i="1" aria-pressed="false">
-            <span class="panel-media">
-              <video class="panel-video" muted loop playsinline preload="none"
-                     poster="assets/step-book.jpg" aria-label="A shop owner on the phone at his counter, packing an order">
-                <source src="assets/step-book.mp4" type="video/mp4">
-              </video>
-              <img class="panel-fallback" src="assets/step-book.jpg" alt="A shop owner on the phone at his counter, packing an order" width="1080" height="1350" loading="lazy" decoding="async">
-              <span class="panel-scrim" aria-hidden="true"></span>
-            </span>
-            <span class="panel-n" aria-hidden="true">02</span>
-            <span class="panel-tab" aria-hidden="true">Book</span>
-            <span class="panel-body">
-              <span class="panel-t">Book</span>
-              <span class="panel-d">Category, time, how many.</span>
-            </span>
-          </button>
-        </li>
-        <li class="panel">
-          <button class="panel-btn" type="button" data-step-i="2" aria-pressed="false">
-            <span class="panel-media">
-              <video class="panel-video" muted loop playsinline preload="none"
-                     poster="assets/step-assign.jpg" aria-label="A verified SAPOTR employee partner cleaning a client&rsquo;s living room">
-                <source src="assets/step-assign.mp4" type="video/mp4">
-              </video>
-              <img class="panel-fallback" src="assets/step-assign.jpg" alt="A verified SAPOTR employee partner cleaning a client&rsquo;s living room" width="1080" height="1350" loading="lazy" decoding="async">
-              <span class="panel-scrim" aria-hidden="true"></span>
-            </span>
-            <span class="panel-n" aria-hidden="true">03</span>
-            <span class="panel-tab" aria-hidden="true">Assign</span>
-            <span class="panel-body">
-              <span class="panel-t">Assign</span>
-              <span class="panel-d">We match verified people.</span>
-            </span>
-          </button>
-        </li>
-        <li class="panel">
-          <button class="panel-btn" type="button" data-step-i="3" aria-pressed="false">
-            <span class="panel-media">
-              <video class="panel-video" muted loop playsinline preload="none"
-                     poster="assets/step-done.jpg" aria-label="A caf&eacute; worker handing over fresh produce, the job complete">
-                <source src="assets/step-done.mp4" type="video/mp4">
-              </video>
-              <img class="panel-fallback" src="assets/step-done.jpg" alt="A caf&eacute; worker handing over fresh produce, the job complete" width="1080" height="1350" loading="lazy" decoding="async">
-              <span class="panel-scrim" aria-hidden="true"></span>
-            </span>
-            <span class="panel-n" aria-hidden="true">04</span>
-            <span class="panel-tab" aria-hidden="true">Done</span>
-            <span class="panel-body">
-              <span class="panel-t">Done</span>
-              <span class="panel-d">They arrive. Work gets done.</span>
-            </span>
-          </button>
-        </li>
-        </ol>
-      </div>
-    </div>
+    <ol class="work r" data-r id="work">
+      <li class="wcard">
+        <span class="wcard-media">
+          <video class="wcard-video" muted loop playsinline preload="none"
+                 poster="assets/step-tap.jpg" aria-label="A finger tapping a booking into a phone screen">
+            <source src="assets/step-tap.mp4" type="video/mp4">
+          </video>
+          <img class="wcard-poster" src="assets/step-tap.jpg" alt="A finger tapping a booking into a phone screen"
+               width="1080" height="1350" loading="lazy" decoding="async">
+          <span class="wcard-scrim" aria-hidden="true"></span>
+        </span>
+        <span class="wcard-step" aria-hidden="true">01</span>
+        <span class="wcard-body">
+          <span class="wcard-t">Just Tap</span>
+          <span class="wcard-d">Open the app and say what you need.</span>
+        </span>
+      </li>
+      <li class="wcard">
+        <span class="wcard-media">
+          <video class="wcard-video" muted loop playsinline preload="none"
+                 poster="assets/step-book.jpg" aria-label="A caf&eacute; owner taking the booking on her phone at the counter">
+            <source src="assets/step-book.mp4" type="video/mp4">
+          </video>
+          <img class="wcard-poster" src="assets/step-book.jpg" alt="A caf&eacute; owner taking the booking on her phone at the counter"
+               width="1080" height="1350" loading="lazy" decoding="async">
+          <span class="wcard-scrim" aria-hidden="true"></span>
+        </span>
+        <span class="wcard-step" aria-hidden="true">02</span>
+        <span class="wcard-body">
+          <span class="wcard-t">Book</span>
+          <span class="wcard-d">Pick the category, time and how many.</span>
+        </span>
+      </li>
+      <li class="wcard">
+        <span class="wcard-media">
+          <video class="wcard-video" muted loop playsinline preload="none"
+                 poster="assets/step-assign.jpg" aria-label="A verified SAPOTR employee partner arriving and being welcomed into a business">
+            <source src="assets/step-assign.mp4" type="video/mp4">
+          </video>
+          <img class="wcard-poster" src="assets/step-assign.jpg" alt="A verified SAPOTR employee partner arriving and being welcomed into a business"
+               width="1080" height="1350" loading="lazy" decoding="async">
+          <span class="wcard-scrim" aria-hidden="true"></span>
+        </span>
+        <span class="wcard-step" aria-hidden="true">03</span>
+        <span class="wcard-body">
+          <span class="wcard-t">Assign</span>
+          <span class="wcard-d">Your verified employee arrives.</span>
+        </span>
+      </li>
+      <li class="wcard">
+        <span class="wcard-media">
+          <video class="wcard-video" muted loop playsinline preload="none"
+                 poster="assets/step-done.jpg" aria-label="A worker handing over finished work across the counter">
+            <source src="assets/step-done.mp4" type="video/mp4">
+          </video>
+          <img class="wcard-poster" src="assets/step-done.jpg" alt="A worker handing over finished work across the counter"
+               width="1080" height="1350" loading="lazy" decoding="async">
+          <span class="wcard-scrim" aria-hidden="true"></span>
+        </span>
+        <span class="wcard-step" aria-hidden="true">04</span>
+        <span class="wcard-body">
+          <span class="wcard-t">Done</span>
+          <span class="wcard-d">The work gets done. Pay for the hours worked.</span>
+        </span>
+      </li>
+    </ol>
   </div>
 </section>
 
@@ -521,30 +506,6 @@
       <button class="btn btn--accent btn--block magnet" type="submit">Book an Employee</button>
       <p class="cta-note" role="status" id="cta-note"></p>
     </form>
-  </div>
-</section>
-
-<!-- ══════════ 10 · Employee partners ══════════ -->
-<section class="section partners" id="partners">
-  <div class="wrap partners-grid">
-    <div>
-      <p class="eyebrow r" data-r>For Employee Partners</p>
-      <h2 data-split>Work that fits your week.</h2>
-      <p class="lede r" data-r>Pick up short-term work near you, get verified once, and get paid for the time you work.</p>
-      <ul class="partner-points r" data-r>
-        <li><svg class="tick" viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10.5l4 4 8-9"/></svg>Choose your own shifts</li>
-        <li><svg class="tick" viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10.5l4 4 8-9"/></svg>Verified once, book anywhere</li>
-        <li><svg class="tick" viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10.5l4 4 8-9"/></svg>Secure, tracked payments</li>
-      </ul>
-      <p class="partner-note r" data-r>Partner sign-up opens with the app launch.</p>
-    </div>
-
-    <ul class="partner-faces r" data-r aria-label="SAPOTR employee partners">
-      <li><img src="assets/emp-sarah.jpg"  alt="Sarah M., SAPOTR employee partner"  width="72" height="72" loading="lazy"><span>Sarah M.<em>Retail</em></span></li>
-      <li><img src="assets/emp-daniel.jpg" alt="Daniel R., SAPOTR employee partner" width="72" height="72" loading="lazy"><span>Daniel R.<em>Hospitality</em></span></li>
-      <li><img src="assets/emp-tane.jpg"   alt="Tane W., SAPOTR employee partner"   width="72" height="72" loading="lazy"><span>Tane W.<em>Property</em></span></li>
-      <li><img src="assets/emp-priya.jpg"  alt="Priya N., SAPOTR employee partner"  width="72" height="72" loading="lazy"><span>Priya N.<em>Showroom</em></span></li>
-    </ul>
   </div>
 </section>
 
