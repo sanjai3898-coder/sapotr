@@ -164,113 +164,55 @@
     }
   })();
 
-  /* ───── 5 · Hero booking app ───── */
-  (function bookingApp() {
-    var form = $('#booking');
-    if (!form) return;
+  /* ───── 5 · Phone showcase ───── */
+  (function phoneApp() {
+    var list = $('#app-list');
+    if (!list) return;
 
+    var CATEGORY = 'Store / Retail';
     var ROSTER = [
-      { name: 'Sarah M.',  photo: 'assets/emp-sarah.jpg',  km: 2.4, rating: 4.9,
-        roles: { 'Store / Retail': 'Retail Support', 'Showroom': 'Showroom Host', 'Events': 'Event Support' } },
-      { name: 'Daniel R.', photo: 'assets/emp-daniel.jpg', km: 3.1, rating: 4.8,
-        roles: { 'Restaurant': 'Kitchen & Service', 'Hotel': 'Hospitality', 'Events': 'Function Service' } },
-      { name: 'Tane W.',   photo: 'assets/emp-tane.jpg',   km: 4.2, rating: 4.9,
-        roles: { 'Property': 'Property Upkeep', 'Store / Retail': 'Stock & Floor', 'Hotel': 'Housekeeping' } },
-      { name: 'Priya N.',  photo: 'assets/emp-priya.jpg',  km: 5.6, rating: 5.0,
-        roles: { 'Showroom': 'Showroom Host', 'Restaurant': 'Front of House', 'Property': 'Cleaning & Upkeep' } }
+      { name: 'Sarah M.', photo: 'assets/emp-sarah.jpg', km: 2.4, rating: 4.9, role: 'Retail Support' },
+      { name: 'Tane W.',  photo: 'assets/emp-tane.jpg',  km: 4.2, rating: 4.9, role: 'Stock & Floor' }
     ];
 
-    var state = { cat: 'Store / Retail', when: 'now', crew: 1 };
-    var list = $('#app-list'), done = $('#app-done');
-
+    var done = $('#app-done');
     var TICK = '<svg class="vbadge" viewBox="0 0 24 24" aria-hidden="true">' +
       '<path d="M12 2.4l2.3 1.6 2.8-.2.9 2.7 2.2 1.7-1 2.6 1 2.6-2.2 1.7-.9 2.7-2.8-.2L12 21.6l-2.3-1.6-2.8.2-.9-2.7-2.2-1.7 1-2.6-1-2.6 2.2-1.7.9-2.7 2.8.2z"/>' +
       '<path d="M8.4 12.1l2.4 2.4 4.7-4.9" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
 
-    function matches() {
-      return ROSTER.filter(function (p) { return p.roles[state.cat]; });
-    }
-
     function render() {
       done.hidden = true;
       list.hidden = false;
-      var people = matches();
+      $('#app-cat').textContent = CATEGORY;
+      $('#app-kicker').textContent = 'Available now';
+      $('#app-sub').textContent = 'Takanini · ' + ROSTER.length + ' nearby';
 
-      $('#app-cat').textContent = state.cat;
-      $('#app-kicker').textContent = state.when === 'now' ? 'Available now' : 'Available for your slot';
-      $('#app-sub').textContent = 'Takanini · ' + people.length + ' nearby' +
-        (state.crew > 1 ? ' · need ' + state.crew : '');
-
-      if (!people.length) {
-        list.innerHTML = '<li class="app-empty">No partners cover this nearby yet.</li>';
-        return;
-      }
-      list.innerHTML = people.map(function (p, i) {
+      list.innerHTML = ROSTER.map(function (p, i) {
         return '<li class="emp" style="animation-delay:' + (i * 70) + 'ms">' +
           '<img src="' + p.photo + '" alt="' + p.name + ', verified SAPOTR employee partner" width="42" height="42" loading="lazy">' +
           '<span class="emp-meta">' +
             '<span class="emp-name">' + p.name + TICK + '<span class="sr-only">Verified</span></span>' +
-            '<span class="emp-role">' + p.roles[state.cat] + '</span>' +
+            '<span class="emp-role">' + p.role + '</span>' +
             '<span class="emp-stat"><b>' + p.km.toFixed(1) + ' km</b><b>★ ' + p.rating.toFixed(1) + '</b><b class="free">Available</b></span>' +
           '</span>' +
           '<button type="button" class="emp-assign" data-assign="' + p.name + '">Assign</button></li>';
       }).join('') +
-        '<li class="app-more">+ ' + (12 - people.length) + ' more available nearby</li>';
+        '<li class="app-more">+ ' + (12 - ROSTER.length) + ' more available nearby</li>';
     }
 
+    /* Tapping Assign walks the screen to the "arriving" state. */
     function assign(name) {
       list.hidden = true;
       done.hidden = false;
-      var eta = 12 + Math.floor(Math.random() * 14);
-      $('#done-sub').textContent = state.when === 'now'
-        ? name.split(' ')[0] + ' is on the way · ' + eta + ' min'
-        : name.split(' ')[0] + ' is booked for your slot';
+      $('#done-sub').textContent = name.split(' ')[0] + ' is on the way · ' +
+        (12 + Math.floor(Math.random() * 14)) + ' min';
     }
-
-    $$('.chip', form).forEach(function (chip) {
-      chip.addEventListener('click', function () {
-        $$('.chip', form).forEach(function (c) { c.classList.remove('is-on'); c.setAttribute('aria-checked', 'false'); });
-        chip.classList.add('is-on');
-        chip.setAttribute('aria-checked', 'true');
-        state.cat = chip.dataset.cat;
-        render();
-      });
-    });
-
-    var sched = $('#sched');
-    $$('.seg-btn', form).forEach(function (btn) {
-      btn.addEventListener('click', function () {
-        $$('.seg-btn', form).forEach(function (b) { b.classList.remove('is-on'); b.setAttribute('aria-checked', 'false'); });
-        btn.classList.add('is-on');
-        btn.setAttribute('aria-checked', 'true');
-        state.when = btn.dataset.when;
-        sched.hidden = state.when !== 'later';
-        render();
-      });
-    });
-
-    $$('.step-btn', form).forEach(function (btn) {
-      btn.addEventListener('click', function () {
-        state.crew = Math.max(1, Math.min(20, state.crew + Number(btn.dataset.step)));
-        $('#crew').textContent = state.crew;
-        render();
-      });
-    });
 
     list.addEventListener('click', function (e) {
       var b = e.target.closest('[data-assign]');
       if (b) assign(b.dataset.assign);
     });
     $('#app-reset').addEventListener('click', render);
-
-    form.addEventListener('submit', function (e) {
-      e.preventDefault();
-      done.hidden = true;
-      list.hidden = false;
-      if (reduced) { render(); return; }
-      list.innerHTML = '<li class="app-scan"><i></i>Finding available employees…</li>';
-      setTimeout(render, 850);
-    });
 
     render();
   })();
@@ -410,9 +352,7 @@
     if (!form) return;
     form.addEventListener('submit', function (e) {
       e.preventDefault();
-      var n = Math.max(1, Number($('#cta-crew').value) || 1);
-      $('#cta-note').textContent = 'Finding ' + n + (n === 1 ? ' verified employee' : ' verified employees') +
-        ' for ' + $('#cta-cat').value.toLowerCase() + ' — we’ll confirm shortly.';
+      $('#cta-note').textContent = 'Thanks — we’ll be in touch to confirm your booking.';
     });
   })();
 

@@ -100,44 +100,10 @@
         <li><svg class="tick" viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10.5l4 4 8-9"/></svg>Pay for work time</li>
       </ul>
 
-      <form class="console r" id="booking" data-r novalidate>
-        <fieldset class="console-block">
-          <legend>What do you need?</legend>
-          <div class="chipset" role="radiogroup" aria-label="Category">
-            <button type="button" class="chip is-on" role="radio" aria-checked="true"  data-cat="Store / Retail">Store / Retail</button>
-            <button type="button" class="chip" role="radio" aria-checked="false" data-cat="Restaurant">Restaurant</button>
-            <button type="button" class="chip" role="radio" aria-checked="false" data-cat="Showroom">Showroom</button>
-            <button type="button" class="chip" role="radio" aria-checked="false" data-cat="Hotel">Hotel</button>
-            <button type="button" class="chip" role="radio" aria-checked="false" data-cat="Events">Events</button>
-            <button type="button" class="chip" role="radio" aria-checked="false" data-cat="Property">Property</button>
-          </div>
-        </fieldset>
-
-        <div class="console-row">
-          <fieldset class="console-block">
-            <legend>When?</legend>
-            <div class="seg" role="radiogroup" aria-label="When">
-              <button type="button" class="seg-btn is-on" role="radio" aria-checked="true"  data-when="now">Now</button>
-              <button type="button" class="seg-btn"       role="radio" aria-checked="false" data-when="later">Schedule</button>
-            </div>
-            <label class="sched" id="sched" hidden>
-              <span class="sr-only">Date and time</span>
-              <input type="datetime-local" id="sched-input">
-            </label>
-          </fieldset>
-
-          <fieldset class="console-block">
-            <legend>How many?</legend>
-            <div class="stepper">
-              <button type="button" class="step-btn" data-step="-1" aria-label="Fewer employees">−</button>
-              <output id="crew" for="booking">1</output>
-              <button type="button" class="step-btn" data-step="1" aria-label="More employees">+</button>
-            </div>
-          </fieldset>
-        </div>
-
-        <button class="btn btn--accent btn--block magnet" type="submit">Find Available Employees</button>
-      </form>
+      <div class="hero-cta r" data-r>
+        <a class="btn btn--accent magnet" href="#book">Book an Employee</a>
+        <a class="btn btn--ghost" href="#how-it-works">See how it works</a>
+      </div>
     </div>
 
     <div class="hero-phone r" data-r data-parallax="0.05">
@@ -500,20 +466,6 @@
     <p class="section-sub section-sub--light r" data-r>Book a SAPOTR.</p>
 
     <form class="cta-form r" data-r id="cta-form" novalidate>
-      <div class="cta-fields">
-        <label class="cta-field"><span>Category</span>
-          <select id="cta-cat">
-            <option>Store / Retail</option><option>Restaurant</option><option>Showroom</option>
-            <option>Hotel</option><option>Events</option><option>Property</option>
-          </select>
-        </label>
-        <label class="cta-field"><span>Date &amp; time</span>
-          <input type="datetime-local" id="cta-when">
-        </label>
-        <label class="cta-field cta-field--n"><span>People</span>
-          <input type="number" id="cta-crew" min="1" max="20" value="1" inputmode="numeric">
-        </label>
-      </div>
       <button class="btn btn--accent btn--block magnet" type="submit">Book an Employee</button>
       <p class="cta-note" role="status" id="cta-note"></p>
     </form>
