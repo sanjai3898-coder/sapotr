@@ -29,7 +29,8 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=Bebas+Neue&family=Josefin+Sans:wght@600&family=Marcellus&family=Oswald:wght@500&family=Pacifico&family=Playfair+Display:ital,wght@1,700&family=Quicksand:wght@600&family=Roboto+Slab:wght@600&family=Saira+Condensed:wght@700&display=swap" rel="stylesheet">
-<link rel="preload" as="image" href="assets/hero-poster.jpg">
+<link rel="preload" as="image" href="assets/hero-poster.jpg" media="(min-width: 681px)">
+<link rel="preload" as="image" href="assets/hero-poster-mobile.jpg" media="(max-width: 680px)">
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -80,9 +81,9 @@
 <!-- ══════════ 1 · Hero ══════════ -->
 <section class="hero" id="hero">
   <div class="hero-media" aria-hidden="true">
-    <video id="hero-video" class="hero-video" autoplay muted loop playsinline preload="metadata"
-           poster="assets/hero-poster.jpg">
-      <source src="assets/hero-mobile.mp4" type="video/mp4" media="(max-width: 720px)">
+    <video id="hero-video" class="hero-video" autoplay muted loop playsinline preload="metadata">
+      <!-- 9:16 recut of the same film for portrait screens -->
+      <source src="assets/hero-mobile.mp4" type="video/mp4" media="(max-width: 680px)">
       <source src="assets/hero.mp4" type="video/mp4">
     </video>
     <span class="hero-scrim"></span>
