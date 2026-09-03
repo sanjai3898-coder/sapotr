@@ -198,71 +198,93 @@
   </div>
 </section>
 
-<!-- ══════════ 3 · How it works — scroll-scrubbed ══════════ -->
+<!-- ══════════ 3 · How it works — filmstrip, scroll-scrubbed ══════════ -->
 <section class="section--tint journey-wrap" id="how-it-works">
   <div class="journey-track" id="journey-track">
     <div class="journey-sticky">
-      <div class="wrap journey-inner">
-        <div class="journey-left">
-          <p class="eyebrow r" data-r>How it works</p>
-          <h2 data-split>From Need to Done.</h2>
-
-          <ol class="steps" id="steps">
-            <li><button class="step is-on" type="button" data-step-i="0" aria-pressed="true">
-              <span class="step-n">01</span><span class="step-t">Just Tap</span><span class="step-d">Say what you need.</span></button></li>
-            <li><button class="step" type="button" data-step-i="1" aria-pressed="false">
-              <span class="step-n">02</span><span class="step-t">Book</span><span class="step-d">Category, time, how many.</span></button></li>
-            <li><button class="step" type="button" data-step-i="2" aria-pressed="false">
-              <span class="step-n">03</span><span class="step-t">Assign</span><span class="step-d">We match verified people.</span></button></li>
-            <li><button class="step" type="button" data-step-i="3" aria-pressed="false">
-              <span class="step-n">04</span><span class="step-t">Done</span><span class="step-d">They arrive. Work gets done.</span></button></li>
-          </ol>
-
-          <div class="journey-rail" aria-hidden="true"><span class="journey-fill" id="journey-fill"></span></div>
+      <div class="wrap">
+        <div class="journey-head">
+          <div>
+            <p class="eyebrow r" data-r>How it works</p>
+            <h2 data-split>From Need to Done.</h2>
+          </div>
+          <div class="journey-meter" aria-hidden="true"><span class="journey-fill" id="journey-fill"></span></div>
         </div>
 
-        <div class="journey-screen" aria-live="polite">
-          <div class="mini is-on" data-mini="0">
-            <p class="mini-h">What do you need?</p>
-            <div class="mini-grid">
-              <span class="mini-tile is-on">Store</span><span class="mini-tile">Restaurant</span>
-              <span class="mini-tile">Showroom</span><span class="mini-tile">Hotel</span>
-            </div>
-            <span class="mini-bar">Continue</span>
-          </div>
-
-          <div class="mini" data-mini="1">
-            <p class="mini-h">Booking</p>
-            <div class="mini-rows">
-              <span class="mini-row"><em>When</em><strong>Today · 2:00 pm</strong></span>
-              <span class="mini-row"><em>Hours</em><strong>3 hours</strong></span>
-              <span class="mini-row"><em>Employees</em><strong>2 people</strong></span>
-              <span class="mini-row mini-row--total"><em>Rate</em><strong>Flat</strong></span>
-            </div>
-          </div>
-
-          <div class="mini" data-mini="2">
-            <p class="mini-h">Matching nearby</p>
-            <div class="mini-match">
-              <img src="assets/emp-sarah.jpg" alt="Sarah M., verified SAPOTR employee partner" width="44" height="44" loading="lazy">
-              <span><strong>Sarah M.</strong><em>Retail · 2.4 km</em></span><span class="mini-badge">Verified</span>
-            </div>
-            <div class="mini-match">
-              <img src="assets/emp-tane.jpg" alt="Tane W., verified SAPOTR employee partner" width="44" height="44" loading="lazy">
-              <span><strong>Tane W.</strong><em>General · 3.1 km</em></span><span class="mini-badge">Verified</span>
-            </div>
-            <span class="mini-pulse"></span>
-          </div>
-
-          <div class="mini" data-mini="3">
-            <p class="mini-h">Complete</p>
-            <div class="mini-done">
-              <svg viewBox="0 0 52 52" aria-hidden="true"><circle cx="26" cy="26" r="23"/><path class="dt" d="M16 27l7 7 13-14"/></svg>
-              <p><strong>3 h 05 m</strong> worked</p>
-              <p class="mini-note">Paid for work time only.</p>
-            </div>
-          </div>
-        </div>
+        <ol class="strip" id="steps">
+        <li class="panel is-on">
+          <button class="panel-btn" type="button" data-step-i="0" aria-pressed="true">
+            <span class="panel-media">
+              <video class="panel-video" muted loop playsinline preload="none"
+                     poster="assets/step-tap.jpg" aria-label="Close-up of a business owner tapping a booking into the SAPOTR app">
+                <source src="assets/step-tap.mp4" type="video/mp4">
+              </video>
+              <img class="panel-fallback" src="assets/step-tap.jpg" alt="Close-up of a business owner tapping a booking into the SAPOTR app" width="880" height="1100" loading="lazy" decoding="async">
+              <span class="panel-scrim" aria-hidden="true"></span>
+            </span>
+            <span class="panel-n" aria-hidden="true">01</span>
+            <span class="panel-tab" aria-hidden="true">Just Tap</span>
+            <span class="panel-body">
+              <span class="panel-t">Just Tap</span>
+              <span class="panel-d">Say what you need.</span>
+            </span>
+          </button>
+        </li>
+        <li class="panel">
+          <button class="panel-btn" type="button" data-step-i="1" aria-pressed="false">
+            <span class="panel-media">
+              <video class="panel-video" muted loop playsinline preload="none"
+                     poster="assets/step-book.jpg" aria-label="A manager on the street confirming a SAPOTR booking on his phone">
+                <source src="assets/step-book.mp4" type="video/mp4">
+              </video>
+              <img class="panel-fallback" src="assets/step-book.jpg" alt="A manager on the street confirming a SAPOTR booking on his phone" width="880" height="1100" loading="lazy" decoding="async">
+              <span class="panel-scrim" aria-hidden="true"></span>
+            </span>
+            <span class="panel-n" aria-hidden="true">02</span>
+            <span class="panel-tab" aria-hidden="true">Book</span>
+            <span class="panel-body">
+              <span class="panel-t">Book</span>
+              <span class="panel-d">Category, time, how many.</span>
+            </span>
+          </button>
+        </li>
+        <li class="panel">
+          <button class="panel-btn" type="button" data-step-i="2" aria-pressed="false">
+            <span class="panel-media">
+              <video class="panel-video" muted loop playsinline preload="none"
+                     poster="assets/step-assign.jpg" aria-label="A verified SAPOTR employee partner arriving at a job carrying stock">
+                <source src="assets/step-assign.mp4" type="video/mp4">
+              </video>
+              <img class="panel-fallback" src="assets/step-assign.jpg" alt="A verified SAPOTR employee partner arriving at a job carrying stock" width="880" height="1100" loading="lazy" decoding="async">
+              <span class="panel-scrim" aria-hidden="true"></span>
+            </span>
+            <span class="panel-n" aria-hidden="true">03</span>
+            <span class="panel-tab" aria-hidden="true">Assign</span>
+            <span class="panel-body">
+              <span class="panel-t">Assign</span>
+              <span class="panel-d">We match verified people.</span>
+            </span>
+          </button>
+        </li>
+        <li class="panel">
+          <button class="panel-btn" type="button" data-step-i="3" aria-pressed="false">
+            <span class="panel-media">
+              <video class="panel-video" muted loop playsinline preload="none"
+                     poster="assets/step-done.jpg" aria-label="Two shop workers restocking the floor together, job complete">
+                <source src="assets/step-done.mp4" type="video/mp4">
+              </video>
+              <img class="panel-fallback" src="assets/step-done.jpg" alt="Two shop workers restocking the floor together, job complete" width="880" height="1100" loading="lazy" decoding="async">
+              <span class="panel-scrim" aria-hidden="true"></span>
+            </span>
+            <span class="panel-n" aria-hidden="true">04</span>
+            <span class="panel-tab" aria-hidden="true">Done</span>
+            <span class="panel-body">
+              <span class="panel-t">Done</span>
+              <span class="panel-d">They arrive. Work gets done.</span>
+            </span>
+          </button>
+        </li>
+        </ol>
       </div>
     </div>
   </div>
@@ -274,30 +296,56 @@
     <p class="eyebrow r" data-r>Why SAPOTR</p>
     <h2 data-split>Simple to book. Easy to trust.</h2>
 
-    <div class="bento">
-      <article class="tile tile--lg r" data-r data-tilt>
+    <div class="bento" id="bento">
+      <article class="tile tile--lg r" data-r data-tilt data-spot>
         <span class="tile-ic ic-cyan"><svg viewBox="0 0 24 24"><path d="M13 2L4.5 13.5H11L10 22l8.5-11.5H12L13 2z"/></svg></span>
         <h3>Fast</h3><p>People when you need them.</p>
+        <span class="viz viz-bars" aria-hidden="true">
+          <i style="--w:96%;--d:.05s"></i><i style="--w:72%;--d:.15s"></i><i style="--w:44%;--d:.25s"></i>
+        </span>
       </article>
-      <article class="tile r" data-r data-tilt>
+
+      <article class="tile r" data-r data-tilt data-spot>
         <span class="tile-ic ic-yellow"><svg viewBox="0 0 24 24"><path d="M12 2.5l7.5 3.3v5.3c0 4.7-3.2 8.8-7.5 10.3-4.3-1.5-7.5-5.6-7.5-10.3V5.8L12 2.5z"/><path class="in" d="M8.6 12.2l2.3 2.3 4.5-4.8"/></svg></span>
         <h3>Verified</h3><p>Checked employee partners.</p>
+        <span class="viz viz-chips" aria-hidden="true"><i>ID checked</i><i>Work rights</i></span>
       </article>
-      <article class="tile r" data-r data-tilt>
+
+      <article class="tile r" data-r data-tilt data-spot>
         <span class="tile-ic ic-cyan"><svg viewBox="0 0 24 24"><rect x="3" y="5.5" width="18" height="13" rx="2.5"/><path class="in" d="M3 10h18M7 14.5h5"/></svg></span>
         <h3>Transparent</h3><p>Clear price before you book.</p>
+        <span class="viz viz-rate" aria-hidden="true"><b>Flat rate</b><s>hidden fees</s></span>
       </article>
-      <article class="tile r" data-r data-tilt>
+
+      <article class="tile r" data-r data-tilt data-spot>
         <span class="tile-ic ic-red"><svg viewBox="0 0 24 24"><path d="M12 21s7-5.4 7-10.5A7 7 0 005 10.5C5 15.6 12 21 12 21z"/><circle class="in" cx="12" cy="10.5" r="2.5"/></svg></span>
         <h3>Trackable</h3><p>See every booking’s status.</p>
+        <span class="viz viz-route" aria-hidden="true">
+          <svg viewBox="0 0 160 40" preserveAspectRatio="none">
+            <path class="rt" d="M6 32C40 32 44 10 78 10s40 20 76 20"/>
+            <circle class="rd" r="4"><animateMotion dur="3.4s" repeatCount="indefinite"
+              path="M6 32C40 32 44 10 78 10s40 20 76 20"/></circle>
+          </svg>
+        </span>
       </article>
-      <article class="tile r" data-r data-tilt>
+
+      <article class="tile r" data-r data-tilt data-spot>
         <span class="tile-ic ic-yellow"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path class="in" d="M12 6.8V12l3.4 2"/></svg></span>
         <h3>Fair</h3><p>Pay for work time only.</p>
+        <span class="viz viz-arc" aria-hidden="true">
+          <svg viewBox="0 0 44 44"><circle class="ring" cx="22" cy="22" r="18"/><circle class="arc" cx="22" cy="22" r="18"/></svg>
+          <b>Breaks excluded</b>
+        </span>
       </article>
-      <article class="tile tile--lg r" data-r data-tilt>
+
+      <article class="tile tile--lg r" data-r data-tilt data-spot>
         <span class="tile-ic ic-cyan"><svg viewBox="0 0 24 24"><path d="M4 12a8 8 0 0114-5.3M20 12a8 8 0 01-14 5.3"/><path class="in" d="M18 3v4h-4M6 21v-4h4"/></svg></span>
         <h3>Reliable</h3><p>Dependable cover, every shift.</p>
+        <span class="viz viz-week" aria-hidden="true">
+          <i style="--d:.05s;--h:62%"></i><i style="--d:.11s;--h:78%"></i><i style="--d:.17s;--h:70%"></i>
+          <i style="--d:.23s;--h:92%"></i><i style="--d:.29s;--h:84%"></i><i style="--d:.35s;--h:100%"></i>
+          <i style="--d:.41s;--h:74%"></i>
+        </span>
       </article>
     </div>
   </div>
@@ -416,8 +464,12 @@
 </section>
 
 <!-- ══════════ 8 · FAQ ══════════ -->
-<section class="section section--tint" id="faq">
-  <div class="wrap wrap--narrow">
+<section class="section faq" id="faq">
+  <div class="faq-media" aria-hidden="true">
+    <img src="assets/faq-bg.jpg" alt="" width="1920" height="1080" loading="lazy" decoding="async">
+    <span class="faq-scrim"></span>
+  </div>
+  <div class="wrap wrap--narrow faq-inner">
     <p class="eyebrow r" data-r>FAQ</p>
     <h2 data-split>Questions, Answered.</h2>
 

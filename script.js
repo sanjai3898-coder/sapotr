@@ -217,35 +217,47 @@
     render();
   })();
 
-  /* ───── 6 · Journey: scroll-scrubbed steps ───── */
+  /* ───── 6 · Journey filmstrip: scroll-scrubbed panels ───── */
   (function journey() {
-    var steps = $$('#steps .step');
-    var minis = $$('.mini');
+    var panels = $$('#steps .panel');
+    var btns = $$('#steps .panel-btn');
     var fill = $('#journey-fill');
     var track = $('#journey-track');
-    if (!steps.length) return;
+    if (!panels.length) return;
 
     var at = -1;
     function show(i) {
       if (i === at) return;
       at = i;
-      steps.forEach(function (s, n) {
-        s.classList.toggle('is-on', n === i);
-        s.setAttribute('aria-pressed', String(n === i));
+      panels.forEach(function (p, n) {
+        var on = n === i;
+        p.classList.toggle('is-on', on);
+        btns[n].setAttribute('aria-pressed', String(on));
+
+        /* Only the open panel plays — keeps four videos from decoding at once. */
+        var v = $('.panel-video', p);
+        if (!v || reduced) return;
+        if (on) {
+          if (!v.dataset.loaded) { v.load(); v.dataset.loaded = '1'; }
+          var play = v.play();
+          if (play && play.catch) play.catch(function () { /* poster stands in */ });
+        } else {
+          v.pause();
+        }
       });
-      minis.forEach(function (m, n) { m.classList.toggle('is-on', n === i); });
-      if (fill) fill.style.height = ((i + 1) / steps.length * 100) + '%';
+      if (fill) fill.style.width = ((i + 1) / panels.length * 100) + '%';
     }
 
-    steps.forEach(function (s, i) {
-      s.addEventListener('click', function () { show(i); });
+    btns.forEach(function (b, i) {
+      b.addEventListener('click', function () { show(i); });
+      b.addEventListener('mouseenter', function () { if (!scrubs) show(i); });
     });
 
-    /* Desktop: map scroll position inside the tall track onto the four steps.
-       Kept as a pure function so the mapping can be tested without scrolling. */
+    /* Map scroll position inside the tall track onto the panels.
+       Pure function so the mapping can be tested without scrolling. */
     function stepFromRect(top, height, viewport, count) {
       var span = height - viewport;
-      if (span <= 0) return null;                     /* track shorter than viewport */
+      if (span <= 0) return null;
       var p = Math.min(Math.max(-top / span, 0), 0.999);
       return Math.floor(p * count);
     }
@@ -255,12 +267,11 @@
     if (scrubs && track) {
       onScroll(function () {
         var r = track.getBoundingClientRect();
-        var i = stepFromRect(r.top, r.height, window.innerHeight, steps.length);
+        var i = stepFromRect(r.top, r.height, window.innerHeight, panels.length);
         if (i !== null) show(i);
       });
-    } else {
-      show(0);
     }
+    show(0);
   })();
 
   /* ───── 7 · Chat sequence ───── */
@@ -369,6 +380,15 @@
       el.addEventListener('pointerleave', function () {
         el.style.setProperty('--ty', '0deg');
         el.style.setProperty('--tx', '0deg');
+      });
+    });
+
+    /* tiles light up under the pointer */
+    $$('[data-spot]').forEach(function (el) {
+      el.addEventListener('pointermove', function (e) {
+        var r = el.getBoundingClientRect();
+        el.style.setProperty('--mx', (e.clientX - r.left) + 'px');
+        el.style.setProperty('--my', (e.clientY - r.top) + 'px');
       });
     });
 
